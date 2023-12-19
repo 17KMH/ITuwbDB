@@ -67,7 +67,6 @@ $app->get('/customers', function (Request $request, Response $response) {
 
     foreach ($customers as &$cust) {
         $id = $cust['ID_Add'];
-        // echo ("ID:" . $id);
         $stmt = $db->prepare('SELECT * FROM Addresses WHERE Addresses.ID_Add = :id');
         $stmt->bindParam(':id', $id);
         $stmt->execute();
@@ -126,7 +125,7 @@ $app->post('/customers', function (Request $request, Response $response) {
 $app->put('/customers/{id}', function (Request $request, Response $response, array $args) {
     $id = $args['id'];
     $data = $request->getParsedBody();
-    var_dump($data);
+    //var_dump($data); debugging
     $address = $data['Address'];
     $id_address = $address['ID_Add'];
     $db = $this->get('db');
@@ -159,6 +158,69 @@ $app->delete('/customers/{id}', function (Request $request, Response $response, 
     $stmt->execute();
 
     return $response->withJson(['message' => 'Customer deleted successfully']);
+});
+
+// Get all products
+$app->get('/products', function (Request $request, Response $response) {
+    $db = $this->get('db');
+    $stmt = $db->query('SELECT * FROM Products');
+    $products = $stmt->fetchAll();
+
+    return $response->withJson($products);
+});
+
+// Get a specific product by ID
+$app->get('/products/{id}', function (Request $request, Response $response, array $args) {
+    $db = $this->get('db');
+    $stmt = $db->prepare('SELECT * FROM Products WHERE ID_Prod = :id');
+    $stmt->bindParam(':id', $args['id']);
+    $stmt->execute();
+    $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$product) {
+        return $response->withStatus(404)->withJson(['error' => 'Product not found']);
+    }
+
+    return $response->withJson($product);
+});
+
+// Add a new product
+$app->post('/products', function (Request $request, Response $response) {
+    $data = $request->getParsedBody();
+    $db = $this->get('db');
+
+    $stmt = $db->prepare('INSERT INTO Products (Name, Type) VALUES (:name, :type)');
+    $stmt->bindParam(':name', $data['Name']);
+    $stmt->bindParam(':type', $data['Type']);
+    $stmt->execute();
+
+    return $response->withJson(['message' => 'Product added successfully']);
+});
+// Update a product
+$app->put('/products/{id}', function (Request $request, Response $response, array $args) {
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+    $db = $this->get('db');
+
+    $stmt = $db->prepare('UPDATE Products SET Name = :name, Type = :type WHERE ID_Prod = :id');
+    $stmt->bindParam(':id', $id);
+    $stmt->bindParam(':name', $data['Name']);
+    $stmt->bindParam(':type', $data['Type']);
+    $stmt->execute();
+
+    return $response->withJson(['message' => 'Product updated successfully']);
+});
+
+// Delete a product
+$app->delete('/products/{id}', function (Request $request, Response $response, array $args) {
+    $id = $args['id'];
+    $db = $this->get('db');
+
+    $stmt = $db->prepare('DELETE FROM Products WHERE ID_Prod = :id');
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+
+    return $response->withJson(['message' => 'Product deleted successfully']);
 });
 
 // Run Slim app

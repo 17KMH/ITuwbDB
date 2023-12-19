@@ -1,72 +1,75 @@
-var cust_get_list = (function() {
+var prod_get_list = (function() {
     "use strict";
 
-    var cust_get_list = {}; //erzeugen eines Objektes
+    var prod_get_list = {}; //erzeugen eines leeren Objektes
 
-    cust_get_list.list = null; //erzeugen von Attributen des Objektes
-    cust_get_list.finishedWithError = false;
-    cust_get_list.error = {};
+    prod_get_list.list = null; //List-Eigenshaft wird hinzugefuegt
+    prod_get_list.finishedWithError = false; //Verfolgung von Fehlern
+    prod_get_list.error = {}; //Speichern von Fehlern
 
-    cust_get_list.init = function () { //erzeugen von Methoden des Objektes
-
+    prod_get_list.init = function () { //???
+        //prod_get_list.list = [
+            //{ "ID": 1, "Name": "Dummy Produkt 1", "Type": "Type 1" },
+            //{ "ID": 2, "Name": "Dummy Produkt 2", "Type": "Type 2" },
+        //];
     };
-
-    cust_get_list.getListWithAjax = function (next_function) {
+    
+    prod_get_list.getListWithAjax = function (next_function) {
 
         function success_func (result) {
-            //console.log(result)
             if (result !== null) {
-                cust_get_list.list = result;
-                //console.log(cust_get_list)
+                prod_get_list.list = result;
             } else {
-                cust_get_list.list = {};
+                prod_get_list.list = {};
             }
 
-            next_function(cust_get_list);
+            next_function(result);
         };
- 
+        
         function error_func (xhr, status, error) {
             console.log("XHR", xhr);
-            cust_get_list.list = {};
-            cust_get_list.finishedWithError = true;
-            cust_get_list.error.status = status;
-            cust_get_list.error.code = xhr.status;
-            cust_get_list.error.message = error;
+            prod_get_list.list = {};
+            prod_get_list.finishedWithError = true;
+            prod_get_list.error.status = status;
+            prod_get_list.error.code = xhr.status;
+            prod_get_list.error.message = error;
  
             next_function();
-         };
+        };
  
         $.ajax({
             method: "GET",
-            url: "v1/customers",
+            url: "v1/products",
             success: success_func,
             error: error_func
         });
     };
-
-    return cust_get_list; // Ausgabe des erstellten Objektes
+    
+    return prod_get_list; // Ausgabe des erstellten Objektes
 })();
 
-var cust_get_detail = (function() {
+var prod_get_detail = (function() {
     "use strict";
 
-    var cust_get_detail = {};
+    var prod_get_detail = {};
 
-    cust_get_detail.data = null;
-    cust_get_detail.finishedWithError = false;
-    cust_get_detail.error = {};
+    prod_get_detail.data = null;
+    prod_get_detail.finishedWithError = false;
+    prod_get_detail.error = {};
 
-    cust_get_detail.init = function () {
+    prod_get_detail.init = function () {
 
     };
 
-    cust_get_detail.getDataWithAjax = function (id, next_function) {
+    prod_get_detail.getDataWithAjax = function (id, next_function) {
 
         function success_func (result) {
             if (result !== null) {
-                cust_get_detail.data = result;
+                //cust_get_detail.data = result; hier war dein Fehler
+                prod_get_detail.data = result;
             } else {
-                cust_get_detail.data = {};
+                //cust_get_detail.data = {};
+                prod_get_detail.data = {};
             }
 
             next_function(result);
@@ -74,40 +77,40 @@ var cust_get_detail = (function() {
  
         function error_func (xhr, status, error) {
             console.log("XHR", xhr);
-            cust_get_detail.data = {};
-            cust_get_detail.finishedWithError = true;
-            cust_get_detail.error.status = status;
-            cust_get_detail.error.code = xhr.status;
-            cust_get_detail.error.message = error;
+            prod_get_detail.data = {};
+            prod_get_detail.finishedWithError = true;
+            prod_get_detail.error.status = status;
+            prod_get_detail.error.code = xhr.status;
+            prod_get_detail.error.message = error;
  
             next_function();
          };
  
         $.ajax({
             method: "GET",
-            url: "v1/customers/" + id,
+            url: "v1/products/" + id,
             //header basic auth (403)
             success: success_func,
             error: error_func
         });
     };
 
-    return cust_get_detail;
+    return prod_get_detail;
 })();
 
-var cust_post = (function() {
+var prod_post = (function() {
     "use strict";
 
-    var cust_post = {};
+    var prod_post = {};
 
-    cust_post.finishedWithError = false;
-    cust_post.error = {};
+    prod_post.finishedWithError = false;
+    prod_post.error = {};
 
-    cust_post.init = function () {
+    prod_post.init = function () {
 
     };
 
-    cust_post.postDataWithAjax = function (data, next_function) {
+    prod_post.postDataWithAjax = function (data, next_function) {
 
         function success_func (result) {
             next_function(result);
@@ -115,39 +118,39 @@ var cust_post = (function() {
 
         function error_func (xhr, status, error) {
             console.log("XHR", xhr);
-            cust_post.finishedWithError = true;
-            cust_post.error.status = status;
-            cust_post.error.code = xhr.status;
-            cust_post.error.message = error;
+            prod_post.finishedWithError = true;
+            prod_post.error.status = status;
+            prod_post.error.code = xhr.status;
+            prod_post.error.message = error;
 
             next_function();
         };
 
         $.ajax({
             method: "POST",
-            url: "v1/customers",
+            url: "v1/products",
             data: data,
             success: success_func,
             error: error_func
         });
     };
 
-    return cust_post;
+    return prod_post;
 })();
 
-var cust_put = (function() {
+var prod_put = (function() {
     "use strict";
 
-    var cust_put = {};
+    var prod_put = {};
 
-    cust_put.finishedWithError = false;
-    cust_put.error = {};
+    prod_put.finishedWithError = false;
+    prod_put.error = {};
 
-    cust_put.init = function () {
+    prod_put.init = function () {
 
     };
 
-    cust_put.putDataWithAjax = function (id, data, next_function) {
+    prod_put.putDataWithAjax = function (id, data, next_function) {
 
         function success_func (result) {
             next_function(result);
@@ -155,40 +158,39 @@ var cust_put = (function() {
 
         function error_func (xhr, status, error) {
             console.log("XHR", xhr);
-            cust_put.finishedWithError = true;
-            cust_put.error.status = status;
-            cust_put.error.code = xhr.status;
-            cust_put.error.message = error;
+            prod_put.finishedWithError = true;
+            prod_put.error.status = status;
+            prod_put.error.code = xhr.status;
+            prod_put.error.message = error;
 
             next_function();
         };
 
         $.ajax({
             method: "PUT",
-            url: "v1/customers/" + id,
+            url: "v1/products/" + id,
             data: data,
             success: success_func,
             error: error_func
         });
     };
 
-    return cust_put;
+    return prod_put;
 })();
 
-var cust_delete = (function() {
+var prod_delete = (function() {
     "use strict";
 
-    var cust_delete = {};
+    var prod_delete = {};
 
-    //cust_delete.data = null;
-    cust_delete.finishedWithError = false;
-    cust_delete.error = {};
+    prod_delete.finishedWithError = false;
+    prod_delete.error = {};
 
-    cust_delete.init = function () {
+    prod_delete.init = function () {
 
     };
 
-    cust_delete.deleteDataWithAjax = function (id, next_function) {
+    prod_delete.deleteDataWithAjax = function (id, next_function) {
 
         function success_func (result) {
             if (result !== null) {
@@ -203,24 +205,24 @@ var cust_delete = (function() {
         function error_func (xhr, status, error) {
             console.log("XHR", xhr);
             //cust_delete.data = {};
-            cust_delete.finishedWithError = true;
-            cust_delete.error.status = status;
-            cust_delete.error.code = xhr.status;
-            cust_delete.error.message = error;
+            prod_delete.finishedWithError = true;
+            prod_delete.error.status = status;
+            prod_delete.error.code = xhr.status;
+            prod_delete.error.message = error;
  
             next_function();
          };
  
         $.ajax({
             method: "DELETE",
-            url: "v1/customers/" + id,
+            url: "v1/products/" + id,
             //header basic auth (403)
             success: success_func,
             error: error_func
         });
     };
 
-    return cust_delete;
+    return prod_delete;
 })();
 
 var hello = (function() {
@@ -270,6 +272,3 @@ var hello = (function() {
 
     return hello;
 })();
-
-/* cust_get_list speichert Rückgabewert (Objekt) einer anonyme Funktion die sofort ausgeführt wird:
-    "(function() {...})()"dadurch sind Eigenschaften nur im Scope der Funktion sichtbar */

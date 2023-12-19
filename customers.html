@@ -1,0 +1,155 @@
+
+<form class="form" id="cust_form">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="input-group input-group-lg">
+                <input class="form-control" type="search" placeholder="Suche..." aria-label="Search" id="search_cust">
+                <span class="input-group-btn px-3">
+                    <button class="btn btn-outline-dark btn-lg" type="button" id="btn_search_cust">Suchen</button>
+                    <button id="btn_open_create_cust" type="button" class="btn btn-outline-dark btn-lg" data-bs-toggle="modal" data-bs-target="#modal_create_cust">
+                        Erstellen
+                      </button>
+                </span>
+            </div>
+        </div>
+    </div>       
+</form>
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+      </tr>
+    </thead>
+    <tbody id="cust_table">
+    </tbody>
+  </table>
+
+<div class="modal fade" tabindex="-1" id="modal_create_cust">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Kunde erstellen</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="dashboardForm">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="inputName">Name</label>
+                        <input type="text" class="form-control" id="inputName" placeholder="Name">
+                        <!-- Wenn id ändern dann auch bei label bei for ändern :) -->
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="form-group col-md-9">
+                        <label for="inputStreet">Straße</label>
+                        <input type="text" class="form-control" id="inputStreet" placeholder="Straße">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputHouseNumber">Hausnummer</label>
+                        <input type="text" class="form-control" id="inputHouseNumber" placeholder="Hausnummer">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="form-group col-md-4">
+                        <label for="inputZip">PLZ</label>
+                        <input type="text" class="form-control" id="inputZip" placeholder="PLZ">
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="inputCity">Stadt</label>
+                        <input type="text" class="form-control" id="inputCity" placeholder="Stadt">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+          <button type="button" class="btn btn-primary" id="btn_create_cust"  data-bs-dismiss="modal">Speichern</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" tabindex="-1" id="modal_view_details">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Kundendetails</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="dashboardForm">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="inputDetailsName">Name</label>
+                        <input type="text" class="form-control" id="inputDetailsName" value="Name">
+                        <!-- Wenn id ändern dann auch bei label bei for ändern :) -->
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-12">
+                      <label for="inputDetailsID">ID</label>
+                      <input type="text" class="form-control" id="inputDetailsID" value="ID" readonly>
+                      <!-- Wenn id ändern dann auch bei label bei for ändern :) -->
+                  </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="form-group col-md-9">
+                        <label for="inputDetailsStreet">Straße</label>
+                        <input type="text" class="form-control" id="inputDetailsStreet" value="Straße">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputDetailsHouseNumber">Hausnummer</label>
+                        <input type="text" class="form-control" id="inputDetailsHouseNumber" value="Hausnummer">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="form-group col-md-4">
+                        <label for="inputDetailsZip">PLZ</label>
+                        <input type="text" class="form-control" id="inputDetailsZip" value="PLZ">
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label for="inputDetailsCity">Stadt</label>
+                        <input type="text" class="form-control" id="inputDetailsCity" value="Stadt">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+          <button type="button" class="btn btn-primary" id="btn_save_cust" data-bs-dismiss="modal">Änderungen speichern</button>
+          <button data-bs-toggle="modal" data-bs-target="#modal_view_details_delete" type="button" class="btn btn-primary" id="btn_delete_cust">Löschen</button>
+        </div><!--data-bs-dismiss="modal"-->
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" tabindex="-1" id="modal_view_details_delete">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-dialog-centered">
+        <div class="modal-header">
+          <h5 class="modal-title">Löschbestätigung</h5>
+        </div>
+        <div class="modal-body">
+            <div style="text-align: center;">
+                <h7>Nach Bestätigung der Änderungen sind dieser nicht zurücksetzbar!</h7>
+            </div>
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="btn_delete_cust_yes" data-bs-dismiss="modal">Ja</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal_view_details">Nein</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="js/cust_ajax.js"></script>
+  <script type="text/javascript" src="js/cust_render.js"></script>
+  <!--KRISTIAN-->
+  <script type="text/javascript" src="js/cust_main.js"></script>
+  
+
+ 

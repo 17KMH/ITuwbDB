@@ -1,43 +1,53 @@
 <!DOCTYPE html>
-<html lang="de">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<html>
+<head>
+    <link rel="icon" type="image/vnd.microsoft.icon" href="assets/Logo.svg">
+    <meta charset="UTF-8">
+    <meta name="description" content="CRM The Coffee Project">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Dennis Führer, Stela Borusik, Oualid Tamimi">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <script src="bootstrap/js/bootstrap.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg justify-content-right">
+        <div class="container-fluid justify-content-between">       
+            <a class="navbar-brand" href="#">
+                <img src="assets/Logo.svg" width="30" height="30" class="d-inline-block align-top" alt=""> The Coffee Project
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav" style="text-align:right" id="nav">
+                    <li class="nav-item">
+                        <button id="btn_view_cust" class="btn btn-lg btn-outline-dark ms-2 mt-2 active" type="button">Kunden</button>
+                    </li>
+                    <li class="nav-item">
+                        <button id="btn_view_empl" class="btn btn-lg btn-outline-dark ms-2 mt-2" type="button">Mitarbeiter</button>
+                    </li>
+                    <li class="nav-item">
+                        <button id="btn_view_prod" class="btn btn-lg btn-outline-dark ms-2 mt-2" type="button">Produkte</button>
+                    </li>
+                    <li class="nav-item">
+                        <button id="btn_view_act" class="btn btn-lg btn-outline-dark ms-2 mt-2" type="button">Aktivitäten</button>
+                    </li>              
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
-        <!-- jQuery first, then Bootstrap JS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
-        <title>Test</title>
-    </head>
+    <div id="content" class="container">
+        
+    </div>
 
-    <body style="padding:20px">
-        <h1 align="center">Test</h1>
-    
-        <br><br>
-        <div id="ajax-header"><h3>Test</h3></div><br>
-        <div id="ajax-items"></div><br>
-
-        <form>
-            <label for="inputOpenID">Open: ID</label>
-            <input type="text" class="form-control" id="inputOpenID" />
-
-            <label for="inputSaveID">Save: ID</label>
-            <input type="text" class="form-control" id="inputSaveID" />
-
-            <label for="inputDeleteID">Delete: ID</label>
-            <input type="text" class="form-control" id="inputDeleteID" />
-        </form>
-
-        <button type="button" class="btn btn-info" id="btn_view_cust">Customer Liste</button>
-        <button type="button" class="btn btn-primary" id="btn_open_view_cust">Customer</button>
-        <button type="button" class="btn btn-primary" id="btn_create_cust">New Customer</button>
-        <button type="button" class="btn btn-primary" id="btn_save_cust">Update Customer</button>
-        <button type="button" class="btn btn-primary" id="btn_delete_cust">Delete</button>
-        <button type="button" class="btn btn-primary" id="btn_hello">Hello</button>
-
-        <script type="text/javascript" src="js/cust_ajax.js"></script>
-        <!--<script type="text/javascript" src="js/render.js"></script>-->
-        <script type="text/javascript" src="js/main.js"></script>
-    </body>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/cust_ajax.js"></script>
+    <script type="text/javascript" src="js/prod_ajax.js"></script>
+    <script type="text/javascript" src="js/cust_render.js"></script>
+    <script type="text/javascript" src="js/prod_render.js"></script>
+  </body>
 </html>
